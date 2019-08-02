@@ -2,7 +2,7 @@
 setlocal enableDelayedExpansion
 title Cle manager ammeliorer
 color 74
-rem
+@echo off
 :recommencer
 cls
 netsh wlan show profiles > temporaire.txt
@@ -39,16 +39,14 @@ set /a indice+=1
 if %numero% LEQ %indice% (
     goto reussi
 ) else goto echec
-rem
 :reussi
-rem Cette boucle parcoure le fichier lorsque on arrive a la valeur de la variable numero on recupere le nom du point d'accees
+rem Cette boucle parcoure le fichier lorsque on arrive a la valeur de la variable numero on recupere le nom du point d accees
 for /f "tokens=1 delims=:" %%a in ('type numero.txt') do (
     set /a nb_ligne+=1
     if !nb_ligne!==!numero! (
         set nom=%%a
     )
 )
-
 netsh wlan show profiles "!nom!" key=clear > temporaire.txt    
 set reponse_pointaccees=true
 
@@ -199,7 +197,6 @@ echo                                                    !nb_point_accees_valide!
 echo.
 echo                                                Les points d accees n ayant pas de cle de securiter ont ete ignorer
 goto final1
-
 
 rem
 :final1
